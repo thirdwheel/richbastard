@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Mar 19, 2016 at 03:00 AM
+-- Generation Time: Mar 19, 2016 at 08:37 AM
 -- Server version: 5.6.29
 -- PHP Version: 5.5.33
 
@@ -70,7 +70,8 @@ INSERT INTO `card_type` (`card_type_id`, `card_type_desc`, `card_type_init_qty`)
 CREATE TABLE `game` (
   `game_id` int(11) NOT NULL,
   `game_desc` varchar(128) NOT NULL,
-  `game_password` varchar(64) NOT NULL
+  `game_password` varchar(64) NOT NULL,
+  `game_in_progress` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -144,7 +145,8 @@ CREATE TABLE `game_trade` (
 CREATE TABLE `player` (
   `player_id` int(11) NOT NULL,
   `player_nickname` varchar(30) NOT NULL,
-  `player_ip_addr` varchar(15) NOT NULL
+  `player_ip_addr` varchar(15) NOT NULL,
+  `player_cleanup_time` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
