@@ -2,6 +2,8 @@
 
 header('Content-type: text/plain');
 
+session_start();
+
 include_once('../config.inc.php');
 include_once('../dbconn.inc.php');
 include_once('global.inc.php');
@@ -36,14 +38,17 @@ foreach ($blcheck as $entry)
 
 $res=$newuser->execute(
 	array(
-		'id' => generate_unique_id('player', 'player_id'),
+		'id' => $id=generate_unique_id('player', 'player_id'),
 		'nick' => $_GET['nickname'],
 		'ipaddr' => $_SERVER['REMOTE_ADDR'],
 		'cleanup' => (microtime(true) + 3600) * 10000
 	)
 );
 if ($res)
+{
 	echo '200 OK';
+	$_SESSION['player_id']=$id;
+}
 else
 	echo '501 Database Error';
 ?>
