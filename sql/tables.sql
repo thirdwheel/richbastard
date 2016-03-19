@@ -23,6 +23,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `blacklist`
+--
+
+CREATE TABLE `blacklist` (
+  `blacklist_timestamp` bigint(20) NOT NULL,
+  `blacklist_ip` varchar(15) NOT NULL,
+  `blacklist_reason` varchar(64) NOT NULL,
+  `blacklist_expire` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `card_type`
 --
 
@@ -148,6 +161,12 @@ CREATE TABLE `trade_card` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `blacklist`
+--
+ALTER TABLE `blacklist`
+  ADD PRIMARY KEY (`blacklist_timestamp`);
 
 --
 -- Indexes for table `card_type`
