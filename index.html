@@ -2,14 +2,52 @@
 <head>
 	<title>Rich Bastard</title>
 	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/gamelist.js"></script>
 	<style type="text/css">
 div {
 	display: none;
 }
+body {
+	padding: 0px;
+	margin: 0px;
+}
 #login {
 	display: block;
+	padding: 10px;
 }
-	</style>
+#gamelist div {
+	display: block;
+}
+#gamelist #mainwindow {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	border: 2px solid black;
+	overflow-y: scroll;
+	width: 79%;
+	height: 99%;
+}
+#gamelist #listbox {
+	position: absolute;
+	top: 0px;
+	left: 79%;
+	border: 2px solid black;
+	overflow-y: scroll;
+	width: 20%;
+	height: 99%;
+}
+#gamelist #mainwindow #control {
+	position: fixed;
+	top: 2px;
+	left: 2px;
+	width: 79%;
+	height: 20px;
+}
+#control #shoutbox {
+	width: 80%;
+	color: grey;
+}
+</style>
 </head>
 <body>
 <div id="login">
@@ -56,6 +94,23 @@ Nickname (must be unique):
 <input type="text" name="nickname" value="" />
 <input type="submit" name="task" value="Let's go!" />
 </form>
+</div>
+
+<div id="gamelist">
+<div id="mainwindow">
+<div id="control">
+<form method="post" onsubmit="return shoutbox_submit()">
+<input type="text" name="shoutbox" id="shoutbox" onfocus="shoutbox_focus()"
+	onblur="shoutbox_blur()"
+	value="Type your message here and press Enter!" />
+<input type="button" name="action" value="Log Out" onclick="logout()" />
+</form>
+</div>
+<div>&nbsp;</div>
+<div>Welcome to Rich Bastard!</div>
+</div>
+<div id="listbox">
+</div>
 </div>
 </body>
 </html>

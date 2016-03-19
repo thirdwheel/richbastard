@@ -6,7 +6,7 @@ session_start();
 include_once('../config.inc.php');
 include_once('../dbconn.inc.php');
 include_once('global.inc.php');
-include_ince('checksession.inc.php');
+include_once('checksession.inc.php');
 
 $game=$db->exec(
 	 "SELECT g.game_id, game_desc, COUNT(player_id) "
