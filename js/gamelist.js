@@ -1,3 +1,63 @@
+var lastChatTS=0;
+
+function check_chat()
+{
+	var xHttp = new XMLHttpRequest();
+	xHttp.onreadystatechange=checkchat_rsc;
+	xHttp.open("GET", "ajax/check_chat.php?game=-1&last=" + lastChatTS,
+		true);
+	xHttp.send();
+}
+function checkchat_rsc()
+{
+	if (this.readyState == 4 && this.status == 200)
+	{
+		aCommand=this.responseText.split("\n");
+		iCommand=aCommand.length
+		mainwin=document.getElementById('mainwindow');
+		if (aCommand[0] == "200 OK")
+		{
+			for (i=1; i < iCommand; i++)
+			{
+				sCommand=aCommand[i];
+				if (sCommand.substr(0,4) == '202 ')
+				{
+					sCommand=sCommand.substr(4,
+						sCommand.length);
+					aValues=sCommand.split(",");
+					lastChatTS=aValues[0];
+					msgtype=aValues[1];
+					sender=aValues[2];
+					recipient=aValues[3];
+					msgloc=(lastChatTS + msgtype + sender +
+						recipient).length + 4
+					message=sCommand.substr(msgloc, 
+						sCommand.length);
+
+					if (msgtype == 'me')
+						insertmsg='* '+sender
+					else
+						insertmsg='&lt;'+sender+'&gt;';
+
+					if (recipient != "")
+						insertmsg='[PRIV] '+insertmsg;
+
+					mainwin.innerHTML += '<div>'+insertmsg
+						+' '+message+'</div>';
+				}
+				if (sCommand.substr(0,4) == '203 ')
+					lastChatTS=sCommand.substr(4,20);
+			}
+			setTimeout(check_chat, "1000");
+		}
+		else
+		{
+			mainwin.innerHTML+="<div>*** Server said: "
+				+this.responseText, "</div>";
+			setTimeout(check_chat, "10000");
+		}
+	}
+}
 function shoutbox_focus()
 {
 	zeShoutbox=document.getElementById('shoutbox');

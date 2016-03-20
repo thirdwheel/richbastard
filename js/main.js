@@ -17,6 +17,7 @@ function beginGame_rsc ()
 			document.getElementById('loginForm').nickname.readonly="readonly";
 			document.getElementById('login').style.display="none";
 			document.getElementById('gamelist').style.display="block";
+			check_chat();
 		}
 		else
 		{
